@@ -5,6 +5,11 @@ namespace DesafioFundamentos.Models
         private decimal precoInicial = 0;
         private decimal precoPorHora = 0;
         private List<string> veiculos = new List<string>();
+        int contadorCarros = 0;
+        int contadorMotos = 0;
+        string placaCarro;
+        string placaMoto;
+        
 
         public Estacionamento(decimal precoInicial, decimal precoPorHora)
         {
@@ -13,26 +18,58 @@ namespace DesafioFundamentos.Models
         }
 
         public void AdicionarVeiculo()
-        {
-            //IMPLEMENTADO COM SUCESSO!|||
-            Console.WriteLine("Digite a placa do veículo para estacionar:");
-            string placa = Console.ReadLine();
+    {
+        //IMPLEMENTADO COM SUCESSO!|||
+        //Adicionado uma verificação para pegar o input do usuário se o veículo é um carro ou uma moto ||
+        Console.WriteLine("Digite se o seu veículo é um Carro ou uma Moto:");
+        string input = Console.ReadLine();
 
-            //Coloquei essa tratativa para que o usuario não digite um valor nulo ou um já existente||
-            if (VeiculoNaoExiste(placa, veiculos) && !string.IsNullOrEmpty(placa))
+        while (input == "Carro" || input == "Moto")
+        {
+            if (input == "Carro")
             {
-            veiculos.Add(placa);
-            Console.WriteLine($"Veículo com placa {placa} foi estacionado.");
+                Console.WriteLine("Digite a placa do seu Carro para estacionar:");
+                placaCarro = Console.ReadLine();
+
+                 //Coloquei essa tratativa para que o usuario não digite um valor nulo ou um já existente||
+                if (VeiculoNaoExiste(placaCarro, veiculos))
+                {
+                    veiculos.Add(placaCarro);
+                    Console.WriteLine($"Carro com placa {placaCarro} foi estacionado com sucesso!.");
+                    contadorCarros++;
+                }
+                else
+                {
+                    Console.WriteLine("Placa inválida. Esta placa já está registrada!");
+                }
             }
-            else
+            else if (input == "Moto")
             {
-            Console.WriteLine("Placa inválida. Esta placa já está registrada!");
-            }
-            bool VeiculoNaoExiste(string placa, List<string> veiculos)
-            {
-            return !veiculos.Contains(placa);
-            }
+                Console.WriteLine("Digite a placa da sua Moto para estacionar:");
+                string placaMoto = Console.ReadLine();
+
+                if (VeiculoNaoExiste(placaMoto, veiculos))
+                {
+                    veiculos.Add(placaMoto);
+                    Console.WriteLine($"Moto com placa {placaMoto} foi estacionada com sucesso!.");
+                    contadorMotos++;
+                }
+                else
+                {
+                    Console.WriteLine("Placa inválida. Esta placa já está registrada!");
+                }
+                }
+
+            Console.WriteLine("Digite se o seu veículo é um Carro ou uma Moto (ou 'sair' para encerrar):");
+            input = Console.ReadLine();
         }
+
+        bool VeiculoNaoExiste(string placa, List<string> veiculos)
+        {
+            return !veiculos.Contains(placa);
+        }
+    }
+
 
         public void RemoverVeiculo()
         {
@@ -43,6 +80,21 @@ namespace DesafioFundamentos.Models
             // Verifica se o veículo existe
             if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
             {
+
+                //Coloquei uma condição para que quando o veiculo seja removido ele não apareça mais na lista de veículos ||
+                
+                if (contadorCarros > 0 && veiculos.Contains(placaCarro))
+                {
+                    veiculos.Remove(placaCarro);
+                    Console.WriteLine($"Carro com placa {placaCarro} removido com sucesso!");
+                    contadorCarros--;
+                }
+                else if (contadorMotos > 0 && veiculos.Contains(placaMoto))
+                {
+                    veiculos.Remove(placaMoto);
+                    Console.WriteLine($"Moto com placa {placaMoto} removida com sucesso!");
+                    contadorMotos--;
+                }
                 Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
                 int horas = int.Parse(Console.ReadLine());
 
@@ -70,6 +122,9 @@ namespace DesafioFundamentos.Models
                  Console.WriteLine($"Os veiculos estacionados são: {item}");
                 //IMPLEMENTADO COM SUCESSO!||    
                 }
+                //Implementei contadores de carros e de motos para imprimir para o usuário a quantidade de carros e motos estacionadas||
+                Console.WriteLine($"A quantidade de Carros estacionados são de: {contadorCarros}");
+                 Console.WriteLine($"A quantidade de Motos estacionadas são de: {contadorMotos}");
             }
             else
             {
