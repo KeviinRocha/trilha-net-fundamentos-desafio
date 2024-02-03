@@ -19,6 +19,7 @@ namespace DesafioFundamentos.Models
 
         public void AdicionarVeiculo()
     {
+        // TODO: Pedir para o usuário digitar uma placa (ReadLine) e adicionar na lista "veiculos"
         //IMPLEMENTADO COM SUCESSO!|||
         //Adicionado uma verificação para pegar o input do usuário se o veículo é um carro ou uma moto ||
         Console.WriteLine("Digite se o seu veículo é um Carro ou uma Moto:");
@@ -73,7 +74,8 @@ namespace DesafioFundamentos.Models
 
         public void RemoverVeiculo()
         {
-            Console.WriteLine("Digite a placa do veículo para remover:");            
+            Console.WriteLine("Digite a placa do veículo para remover:");
+             // Pedir para o usuário digitar a placa e armazenar na variável placa            
             //IMPLEMENTADO COM SUCESSO!|||
             string placa = Console.ReadLine();
            
@@ -95,13 +97,16 @@ namespace DesafioFundamentos.Models
                     Console.WriteLine($"Moto com placa {placaMoto} removida com sucesso!");
                     contadorMotos--;
                 }
+                // TODO: Pedir para o usuário digitar a quantidade de horas que o veículo permaneceu estacionado,
+                
                 Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
                 int horas = int.Parse(Console.ReadLine());
-
+                
+                // TODO: Realizar o seguinte cálculo: "precoInicial + precoPorHora * horas" para a variável valorTotal
                 //IMPLEMENTADO COM SUCESSO!|||
                 decimal valorTotal =  precoInicial + precoPorHora * horas; 
                 
-
+                 // TODO: Remover a placa digitada da lista de veículos
                 //IMPLEMENTADO COM SUCESSO!|||
                 veiculos.Remove(placa);
                 Console.WriteLine($"O veículo {placa} foi removido após o tempo de: {horas} e o preço total foi de: R$ {valorTotal}");
@@ -120,6 +125,7 @@ namespace DesafioFundamentos.Models
                 foreach(string item in veiculos)
                 {
                  Console.WriteLine($"Os veiculos estacionados são: {item}");
+                 // TODO: Realizar um laço de repetição, exibindo os veículos estacionados
                 //IMPLEMENTADO COM SUCESSO!||    
                 }
                 //Implementei contadores de carros e de motos para imprimir para o usuário a quantidade de carros e motos estacionadas||
